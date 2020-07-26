@@ -1,19 +1,16 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+
 import 'package:google_fonts/google_fonts.dart';
-import 'package:rolling_international/localization/language_localization.dart';
 
 import 'package:rolling_international/splash_rolling.dart';
-
-import 'language/localization_constant.dart';
 
 void main() {
   runApp(EasyLocalization(
     child: MyApp(),
     saveLocale: true,
-    path: "lib/lang",
+    path: "assets/lang",
     supportedLocales: [Locale('en', 'US'), Locale('ne', 'NP')],
   ));
 }

@@ -1,12 +1,9 @@
-import 'dart:js';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fluentui_icons/fluentui_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:rolling_international/buttons.dart';
-import 'package:rolling_international/language/lang.dart';
-import 'package:rolling_international/language/localization_constant.dart';
+
 import 'package:rolling_international/register.dart';
 import 'colors.dart';
 import 'home.dart';
@@ -32,41 +29,8 @@ class Login extends StatelessWidget {
     return Scaffold(
       backgroundColor: primaryColor,
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        actions: <Widget>[
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: DropdownButton(
-              onChanged: (Language language) {},
-              underline: SizedBox(),
-              icon: Icon(
-                Icons.language,
-                color: Colors.white,
-              ),
-              items: Language.LanguageList()
-                  .map<DropdownMenuItem<Language>>((lang) => DropdownMenuItem(
-                        value: lang,
-                        child: Row(
-                          children: <Widget>[
-                            Text(lang.flag),
-                            Text(
-                              lang.name,
-                              style: TextStyle(fontSize: 30),
-                            )
-                          ],
-                        ),
-                      ))
-                  .toList(),
-            ),
-          )
-        ],
-      ),
       body: _LoginBody(),
     );
-  }
-
-  void _changeLanguage(Language language) {
-    return print("hello");
   }
 }
 
@@ -95,6 +59,29 @@ class __LoginBodyState extends State<_LoginBody> {
           child: SafeArea(
             child: Column(
               children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    RaisedButton(
+                      onPressed: () {
+                        setState(() {
+                          EasyLocalization.of(context).locale =
+                              Locale('ne', 'NP');
+                        });
+                      },
+                      child: Text('Nepali'),
+                    ),
+                    RaisedButton(
+                      onPressed: () {
+                        setState(() {
+                          EasyLocalization.of(context).locale =
+                              Locale('en', 'US');
+                        });
+                      },
+                      child: Text('English'),
+                    )
+                  ],
+                ),
                 Container(
                   child: ClipPath(
                     child: Container(
@@ -126,7 +113,7 @@ class __LoginBodyState extends State<_LoginBody> {
                 ),
                 Center(
                   child: Text(
-                    'LOGIN TO ACCOUNT'.trim().toString(),
+                    'LOGIN TO ACCOUNT'.tr().toString(),
                     style: TextStyle(
                       color: primaryColor,
                       fontWeight: FontWeight.w600,
@@ -170,7 +157,7 @@ class __LoginBodyState extends State<_LoginBody> {
                         child: Padding(
                           padding: const EdgeInsets.all(12.0),
                           child: Text(
-                            'LOG IN',
+                            'LOG IN'.tr().toString(),
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 16,
@@ -207,14 +194,14 @@ class __LoginBodyState extends State<_LoginBody> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      "Don't have a account? ",
+                      "Don't have a account? ".tr().toString(),
                       style: TextStyle(
                         color: Colors.grey,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
                     ButtonWithIcons(
-                      label: 'Register',
+                      label: 'Register'.tr().toString(),
                       backGroundColor: Colors.white,
                       foreGroundColor: primaryColor,
                       onPressed: () {
@@ -247,7 +234,7 @@ class __LoginBodyState extends State<_LoginBody> {
               FluentSystemIcons.ic_fluent_phone_mobile_filled,
               color: primaryColor,
             ),
-            labelText: "Enter Your Mobile Number",
+            labelText: "Enter Your Mobile Number".tr().toString(),
             contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.0),
@@ -259,7 +246,7 @@ class __LoginBodyState extends State<_LoginBody> {
           autovalidate: true,
           validator: (value) {
             if (value.isEmpty) {
-              return 'Empty Field!';
+              return 'Empty Field!'.tr().toString();
             }
             if (value.length < 10) {
               return 'Minimum 10 Digit Required!';
@@ -282,7 +269,7 @@ class __LoginBodyState extends State<_LoginBody> {
               FluentSystemIcons.ic_fluent_lock_filled,
               color: primaryColor,
             ),
-            labelText: "Enter Your Password",
+            labelText: "Enter Your Password".tr().toString(),
             contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.0),
@@ -304,7 +291,7 @@ class __LoginBodyState extends State<_LoginBody> {
           autovalidate: true,
           validator: (value) {
             if (value.isEmpty) {
-              return 'Empty Field!';
+              return 'Empty Field!'.tr().toString();
             }
             if (value.length < 6) {
               return 'At Least 6 Character Required!';
